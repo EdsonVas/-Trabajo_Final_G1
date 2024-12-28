@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Prototipos de las funciones
+void registrarRequerimiento();
+void validarRequerimiento();
+void priorizarRequerimiento();
+void generarReporte();
+void salir();
+
+// Función principal
+int main() {
+    int opcion;
+
+    while (1) {
+        // Mostrar menú principal
+        printf("\n--- Sistema de Gestión de Requerimientos ---\n");
+        printf("1. Registrar Requerimiento\n");
+        printf("2. Validar Requerimiento\n");
+        printf("3. Priorizar Requerimientos\n");
+        printf("4. Generar Reporte\n");
+        printf("5. Salir\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &opcion);
+
+        // Procesar la opción seleccionada
+        switch (opcion) {
+            case 1:
+                registrarRequerimiento();
+                break;
+            case 2:
+                validarRequerimiento();
+                break;
+            case 3:
+                priorizarRequerimiento();
+                break;
+            case 4:
+                generarReporte();
+                break;
+            case 5:
+                salir();
+                break;
+            default:
+                printf("Opción no válida. Por favor, intente nuevamente.\n");
+        }
+    }
+
+    return 0;
+}
+
+// Función para registrar un requerimiento
+void registrarRequerimiento() {
+    char descripcion[100], tipo[20];
+    int complejidad;
+
+    printf("\n--- Registrar Requerimiento ---\n");
+    printf("Ingrese la descripción del requerimiento: ");
+    scanf(" %[^\n]s", descripcion); // Lee una línea completa
+    printf("Ingrese el tipo de requerimiento (NC, CC, NP): ");
+    scanf("%s", tipo);
+    printf("Ingrese la complejidad (1-5): ");
+    scanf("%d", &complejidad);
+
+    // Simulación del registro
+    printf("Requerimiento registrado exitosamente:\n");
+    printf("- Descripción: %s\n", descripcion);
+    printf("- Tipo: %s\n", tipo);
+    printf("- Complejidad: %d\n", complejidad);
+}
+
+// Función para validar un requerimiento
+void validarRequerimiento() {
+    int id;
+
+    printf("\n--- Validar Requerimiento ---\n");
+    printf("Ingrese el ID del requerimiento a validar: ");
+    scanf("%d", &id);
+
+    // Simulación de validación
+    printf("Requerimiento con ID %d validado exitosamente.\n", id);
+}
+
+// Función para priorizar requerimientos
+void priorizarRequerimiento() {
+    int id, prioridad;
+
+    printf("\n--- Priorizar Requerimientos ---\n");
+    printf("Ingrese el ID del requerimiento a priorizar: ");
+    scanf("%d", &id);
+    printf("Ingrese la nueva prioridad (1-Alta, 2-Media, 3-Baja): ");
+    scanf("%d", &prioridad);
+
+    // Simulación de priorización
+    printf("Requerimiento con ID %d actualizado a prioridad %d.\n", id, prioridad);
+}
+
+// Función para generar reportes
+void generarReporte() {
+    printf("\n--- Generar Reporte ---\n");
+    printf("Reporte de requerimientos generado exitosamente.\n");
+    printf("Detalle:\n");
+    printf("- Total de requerimientos: 25\n");
+    printf("- Pendientes: 10\n");
+    printf("- En proceso: 8\n");
+    printf("- Completados: 7\n");
+}
+
+// Función para salir del sistema
+void salir() {
+    printf("\nSaliendo del sistema. ¡Hasta luego!\n");
+    exit(0);
+}

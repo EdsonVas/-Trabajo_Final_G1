@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Estructura para almacenar usuarios
+typedef struct {
+    char username[50];
+    char password[50];
+} User;
+
+// Función para validar el login
+int validateLogin(char *username, char *password) {
+    FILE *file;
+    User user;
+    int isValid = 0;
+
+    // Abrir el archivo de usuarios en modo lectura
+    file = fopen("users.txt", "r");
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo de usuarios.\n");
+        return 0;
+    }
+
+    // Leer cada usuario y validar credenciales
+    while (fscanf(file, "%s %s", user.username, user.password) != EOF) {
+        if (strcmp(user.username, username) == 0 && strcmp(user.password, password) == 0) {
+            isValid = 1;
+            break;
+        }
+    }
+
+    fclose(file);
+    return isValid;
+}
+
+// Función para registrar un nuevo usuario
+void registerUser() {
+    FILE *file;
+    User user;
+
+    // Abrir el archivo de usuarios en modo escritura/añadir
+    file = fopen("users.txt", "a");
+    if (file == NULL) {
+        printf("No se pudo abrir el archivo de usuarios.\n");
+        return;
+    }
+
+    printf("Ingrese un nombre de usuario: ");
+    scanf("%s", user.username);
+    printf("Ingrese una contraseña: ");
+    scanf("%s", user.password);
+
+    fprintf(file, "%s %s\n", user.username, user.password);
+    fclose(file);
+    printf("Usuario registrado exitosamente.\n");
+}
+
+// Función principal
+int main() {
+    int option;
+    char username[50], password[50];
+
+    while (1) {
+        printf("\n--- Sistema de Login ---\n");
+        printf("1. Iniciar sesión\n");
+        printf("2. Registrar usuario\n");
+        printf("3. Salir\n");
+        printf("Seleccione una opción: ");
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1:
+                printf("Nombre de usuario: ");
+                scanf("%s", username);
+                printf("Contraseña: ");
+                scanf("%s", password);
+
+                if (validateLogin(username, password)) {
+                    printf("Login exitoso. ¡Bienvenido, %s!\n", username);
+                } else {
+                    printf("Usuario o contraseña incorrectos.\n");
+                }
+                break;
+
+            case 2:
+                registerUser();
+                break;
+
+            case 3:
+                printf("Saliendo del sistema. ¡Adiós!\n");
+                exit(0);
+
+            default:
+                printf("Opción no válida. Intente nuevamente.\n");
+        }
+    }
+
+    return 0;
+}
